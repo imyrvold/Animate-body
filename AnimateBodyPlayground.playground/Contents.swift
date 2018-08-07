@@ -23,7 +23,7 @@ class ViewController : UIViewController {
     }()
     lazy var circle: BodyAreaView = {
         let circle = BodyAreaView(frame: CGRect(x: 0, y: 0, width: 48, height: 48))
-        circle.backgroundColor = .clear
+        circle.backgroundColor = .cyan
         
         return circle
     }()
@@ -86,11 +86,12 @@ class ViewController : UIViewController {
         self.superWidthConstraint.isActive = true
         print("body view before: \(self.bodyView.bounds)")
         print("circle origin before: \(self.circle.frame.origin)")
-        UIView.animate(withDuration: 10, animations: {
+        UIView.animate(withDuration: 3, animations: {
             self.view.layoutIfNeeded()
         }) { _ in
             print("body view after: \(self.bodyView.bounds)")
             print("circle frame after: \(self.circle.frame)")
+            self.view.setNeedsDisplay()
         }
     }
     

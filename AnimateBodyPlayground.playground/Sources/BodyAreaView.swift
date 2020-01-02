@@ -10,29 +10,10 @@
 import UIKit
 
 public class BodyAreaView: UIView {
-    var ringColor: UIColor = .black
-    
-    lazy var ringLayer: CAShapeLayer = {
-        let ringLayer = CAShapeLayer()
-        let ringPath = UIBezierPath(ovalIn: self.bounds.insetBy(dx: 4, dy: 4))
-        ringLayer.fillColor = UIColor.clear.cgColor
-        ringLayer.strokeColor = UIColor.black.cgColor
-        ringLayer.path = ringPath.cgPath
-        ringLayer.name = "ring"
-        ringLayer.needsDisplayOnBoundsChange = true
-        
-        return ringLayer
-    }()
-    
     override public func draw(_ rect: CGRect) {
-        self.layer.addSublayer(self.ringLayer)
+        let ringPath = UIBezierPath(ovalIn: self.bounds.insetBy(dx: 4, dy: 4))
+        let con = UIGraphicsGetCurrentContext()!
+        con.addPath(ringPath.cgPath)
+        con.strokePath()
     }
-    
-    override public func layoutSubviews() {
-        guard let sublayers = self.layer.sublayers else { return }
-        for layer in sublayers {
-            layer.frame = layer.bounds
-        }
-    }
-    
 }

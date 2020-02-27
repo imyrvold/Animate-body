@@ -56,8 +56,10 @@ class ViewController : UIViewController {
         super.viewDidLoad()
     }
     
+    var didInitialLayout = false
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        if didInitialLayout { return } // *
+        didInitialLayout = true //
         self.setBodyViewConstraints()
         self.setFibroConstraints()
         
@@ -83,6 +85,7 @@ class ViewController : UIViewController {
     }
     
     @objc func headZoom() {
+        self.iphoneWidthConstraint.isActive = false // *
         self.superWidthConstraint.isActive = true
         print("body view before: \(self.bodyView.bounds)")
         print("circle origin before: \(self.circle.frame.origin)")
@@ -92,6 +95,7 @@ class ViewController : UIViewController {
             print("body view after: \(self.bodyView.bounds)")
             print("circle frame after: \(self.circle.frame)")
             self.view.setNeedsDisplay()
+            self.circle.setNeedsDisplay()
         }
     }
     
